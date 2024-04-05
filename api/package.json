@@ -1,0 +1,30 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon --env-file=.env src/index.js",
+    "start": "node --env-file=.env src/index.js",
+    "test": "node --env-file=.env --test --test-reporter spec"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "basic-auth": "^2.0.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "express": "^4.18.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose-to-swagger": "^1.5.1",
+    "moongose": "^1.0.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.0",
+    "saslprep": "^1.0.3",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0",
+    "zod": "^3.22.4"
+  }
+}
