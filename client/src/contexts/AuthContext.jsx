@@ -19,7 +19,7 @@ export const useAuthContext = () => {
 
 // eslint-disable-next-line react/prop-types
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState({ username: 'mariadb' });
+  const [user, setUser] = useState(null);
   const [authenticated, setAuthenticated] = useState(false);
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(true);

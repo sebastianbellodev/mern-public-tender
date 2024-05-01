@@ -37,13 +37,13 @@ function LoginPage() {
 
         <form onSubmit={onSubmit} className="flex flex-col w-full gap-3">
           <input
-            type="email"
-            {...register('email', { required: true })}
+            type="text"
+            {...register('username', { required: true })}
             className="w-full p-2 border-2 rounded-md border-gray"
-            placeholder="Email"
+            placeholder="Username"
           />
-          {errors.email && (
-            <p className="text-red-300 my-1">Email is required</p>
+          {errors.username && (
+            <p className="text-red-300 my-1">Username is required</p>
           )}
           <input
             type="password"

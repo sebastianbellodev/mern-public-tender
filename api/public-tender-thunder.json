@@ -1,0 +1,341 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "api",
+    "collectionId": "5b0c0aae-365b-4493-9cf6-0d51fecf69d8",
+    "dateExported": "2024-05-01T02:06:10.154Z",
+    "version": "1.2",
+    "folders": [
+        {
+            "_id": "30b46998-0540-42cf-98af-360b9dcaa003",
+            "name": "company",
+            "containerId": "",
+            "created": "2024-03-25T07:20:37.605Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "cca46964-6712-43eb-aada-7a9687fac486",
+            "name": "address",
+            "containerId": "",
+            "created": "2024-03-25T07:20:41.765Z",
+            "sortNum": 20000
+        },
+        {
+            "_id": "7459b7de-e2ff-4225-8b4e-4b4280b2e009",
+            "name": "auth",
+            "containerId": "",
+            "created": "2024-04-30T22:12:38.420Z",
+            "sortNum": 30000
+        },
+        {
+            "_id": "588dfba8-e947-4e11-a650-c2558d816cdb",
+            "name": "file",
+            "containerId": "",
+            "created": "2024-04-30T23:08:13.591Z",
+            "sortNum": 40000
+        },
+        {
+            "_id": "f6e32f7c-60de-40bd-abc2-170ee6dcae6f",
+            "name": "hiring",
+            "containerId": "",
+            "created": "2024-05-01T01:14:31.977Z",
+            "sortNum": 50000
+        },
+        {
+            "_id": "40b95792-bc92-41e9-9b31-0d5718e35129",
+            "name": "law",
+            "containerId": "",
+            "created": "2024-05-01T01:18:45.566Z",
+            "sortNum": 60000
+        },
+        {
+            "_id": "704d9ec4-77a6-461a-8df8-a9cbcd06a35b",
+            "name": "assessment-criteria",
+            "containerId": "",
+            "created": "2024-05-01T01:21:07.023Z",
+            "sortNum": 70000
+        },
+        {
+            "_id": "8a3b4620-a068-4cf2-9649-f57ff9eff535",
+            "name": "hiring-process-category",
+            "containerId": "",
+            "created": "2024-05-01T01:23:14.592Z",
+            "sortNum": 80000
+        },
+        {
+            "_id": "5d7189fa-cc2d-427c-a160-8b869f24f3e5",
+            "name": "international-policy",
+            "containerId": "",
+            "created": "2024-05-01T01:25:03.359Z",
+            "sortNum": 90000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "9797cfa0-d360-4b5f-bd7b-3dfcecd1deea",
+            "colId": "5b0c0aae-365b-4493-9cf6-0d51fecf69d8",
+            "containerId": "cca46964-6712-43eb-aada-7a9687fac486",
+            "name": "postAddress",
+            "url": "{{API}}/addresses",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-03-25T07:23:02.706Z",
+            "modified": "2024-03-25T07:27:26.351Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"street\": \"COATEPEC\",\n  \"exteriorNumber\": \"27A\",\n  \"neighborhood\": \"VERACRUZ\",\n  \"city\": \"XALAPA\",\n  \"state\": \"VERACRUZ\",\n  \"country\": \"MEXICO\",\n  \"postalCode\": \"91020\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "basic",
+                "basic": {
+                    "username": "{{BASIC_AUTH_USER}}",
+                    "password": "{{BASIC_AUTH_PASSWORD}}"
+                }
+            },
+            "tests": []
+        },
+        {
+            "_id": "34ad710c-87a4-4ad6-a304-80631a0941b0",
+            "colId": "5b0c0aae-365b-4493-9cf6-0d51fecf69d8",
+            "containerId": "7459b7de-e2ff-4225-8b4e-4b4280b2e009",
+            "name": "signup",
+            "url": "{{DEPLOYED_API}}/signup",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-04-30T22:12:49.573Z",
+            "modified": "2024-05-01T01:47:18.274Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"username\": \"sebastianbello\",\n  \"email\": \"sebastianbello.trejo@gmail.com\",\n  \"password\": \"a82lñD@s0d\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "basic",
+                "basic": {
+                    "username": "{{BASIC_AUTH_USER}}",
+                    "password": "{{BASIC_AUTH_PASSWORD}}"
+                }
+            }
+        },
+        {
+            "_id": "3d856b3c-cf02-4dc1-bab1-43ba73d738a1",
+            "colId": "5b0c0aae-365b-4493-9cf6-0d51fecf69d8",
+            "containerId": "30b46998-0540-42cf-98af-360b9dcaa003",
+            "name": "postCompany",
+            "url": "{{API}}/companies",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-03-25T07:23:14.791Z",
+            "modified": "2024-04-03T20:43:53.097Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"rfc\": \"BETS011110H8A\",\n  \"name\": \"SILU\",\n  \"comercialSociety\": \"S.A DE C.V\",\n  \"taxRegime\": \"PERSONA MORAL\",\n  \"address\": \"660dbe8fd30f06299fac0e5a\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "basic",
+                "basic": {
+                    "username": "{{BASIC_AUTH_USER}}",
+                    "password": "{{BASIC_AUTH_PASSWORD}}"
+                }
+            },
+            "tests": []
+        },
+        {
+            "_id": "76266fa8-b0fe-4fcc-bd44-c2d864c77c95",
+            "colId": "5b0c0aae-365b-4493-9cf6-0d51fecf69d8",
+            "containerId": "cca46964-6712-43eb-aada-7a9687fac486",
+            "name": "getAddress",
+            "url": "{{API}}/addresses",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-03-29T22:10:20.681Z",
+            "modified": "2024-03-29T22:10:28.126Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "basic",
+                "basic": {
+                    "username": "{{BASIC_AUTH_USER}}",
+                    "password": "{{BASIC_AUTH_PASSWORD}}"
+                }
+            },
+            "tests": []
+        },
+        {
+            "_id": "b13afd3d-c680-4175-9998-de1057483ab3",
+            "colId": "5b0c0aae-365b-4493-9cf6-0d51fecf69d8",
+            "containerId": "7459b7de-e2ff-4225-8b4e-4b4280b2e009",
+            "name": "login",
+            "url": "{{DEPLOYED_API}}/login",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-04-30T22:16:15.567Z",
+            "modified": "2024-05-01T01:47:17.323Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"username\": \"sebastianbello\",\n  \"password\": \"a82lñD@s0d\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "basic",
+                "basic": {
+                    "username": "{{BASIC_AUTH_USER}}",
+                    "password": "{{BASIC_AUTH_PASSWORD}}"
+                }
+            }
+        },
+        {
+            "_id": "b9967b40-0110-42bc-8b44-aaf6ebf4f43c",
+            "colId": "5b0c0aae-365b-4493-9cf6-0d51fecf69d8",
+            "containerId": "7459b7de-e2ff-4225-8b4e-4b4280b2e009",
+            "name": "logout",
+            "url": "{{DEPLOYED_API}}/logout",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-04-30T22:20:54.792Z",
+            "modified": "2024-05-01T01:47:16.577Z",
+            "headers": [],
+            "auth": {
+                "type": "basic",
+                "basic": {
+                    "username": "{{BASIC_AUTH_USER}}",
+                    "password": "{{BASIC_AUTH_PASSWORD}}"
+                }
+            }
+        },
+        {
+            "_id": "8f529abc-196c-47a1-8fd9-04387b17bde0",
+            "colId": "5b0c0aae-365b-4493-9cf6-0d51fecf69d8",
+            "containerId": "7459b7de-e2ff-4225-8b4e-4b4280b2e009",
+            "name": "verify",
+            "url": "{{DEPLOYED_API}}/verify",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2024-04-30T22:34:00.297Z",
+            "modified": "2024-05-01T01:47:14.528Z",
+            "headers": []
+        },
+        {
+            "_id": "c5080297-4f4d-4b0a-8119-10d164f58e0f",
+            "colId": "5b0c0aae-365b-4493-9cf6-0d51fecf69d8",
+            "containerId": "588dfba8-e947-4e11-a650-c2558d816cdb",
+            "name": "postFile",
+            "url": "{{DEPLOYED_API}}/files",
+            "method": "POST",
+            "sortNum": 60000,
+            "created": "2024-04-30T23:08:41.912Z",
+            "modified": "2024-05-01T01:59:08.544Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"id\": \"982687631\",\n  \"budgetaryYear\": \"2017\",\n  \"description\": \"Esto corresponde a la segunda descripción de un proceso de contratación creado recientemente\",\n  \"addendum\": \"Detalles adicionales por segunda ocasión\",\n  \"hiring\": \"66319f7a21cebc3f8ac85410\",\n  \"law\": \"66319fa421cebc3f8ac85414\",\n  \"assessment\": \"66319fcc21cebc3f8ac8541c\",\n  \"advancePayment\": false,\n  \"porcentage\": \"25\",\n  \"hiringProcessCategory\": \"6631a10c21cebc3f8ac85432\",\n  \"internationalPolicy\": [\n    \"6631a00021cebc3f8ac85420\",\n    \"6631a00c21cebc3f8ac85426\",\n    \"6631a01121cebc3f8ac85428\"\n  ],\n  \"deleted\": false\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "71bd639c-6cb8-42c0-b54c-4dafe2818e5e",
+            "colId": "5b0c0aae-365b-4493-9cf6-0d51fecf69d8",
+            "containerId": "588dfba8-e947-4e11-a650-c2558d816cdb",
+            "name": "getFile",
+            "url": "{{API}}/files",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2024-05-01T00:07:42.033Z",
+            "modified": "2024-05-01T00:07:56.935Z",
+            "headers": []
+        },
+        {
+            "_id": "02efe081-4c74-48b5-bc46-67b102fac59f",
+            "colId": "5b0c0aae-365b-4493-9cf6-0d51fecf69d8",
+            "containerId": "f6e32f7c-60de-40bd-abc2-170ee6dcae6f",
+            "name": "postHiring",
+            "url": "{{DEPLOYED_API}}/hirings",
+            "method": "POST",
+            "sortNum": 80000,
+            "created": "2024-05-01T01:14:51.705Z",
+            "modified": "2024-05-01T01:48:23.744Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\": \"Licitación Privada\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "f5e02811-35db-4148-a585-a30fd333676b",
+            "colId": "5b0c0aae-365b-4493-9cf6-0d51fecf69d8",
+            "containerId": "40b95792-bc92-41e9-9b31-0d5718e35129",
+            "name": "postLaw",
+            "url": "{{DEPLOYED_API}}/laws",
+            "method": "POST",
+            "sortNum": 90000,
+            "created": "2024-05-01T01:18:51.983Z",
+            "modified": "2024-05-01T01:49:06.193Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\": \"Fracción V\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "3c9a4877-0837-459a-b469-484cdcbd8c90",
+            "colId": "5b0c0aae-365b-4493-9cf6-0d51fecf69d8",
+            "containerId": "704d9ec4-77a6-461a-8df8-a9cbcd06a35b",
+            "name": "postAssessmentCriteria",
+            "url": "{{DEPLOYED_API}}/assessment-criteria",
+            "method": "POST",
+            "sortNum": 100000,
+            "created": "2024-05-01T01:21:23.201Z",
+            "modified": "2024-05-01T01:49:39.763Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\": \"Ponderado\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "a933158b-8523-44fe-8208-46872f7cd281",
+            "colId": "5b0c0aae-365b-4493-9cf6-0d51fecf69d8",
+            "containerId": "8a3b4620-a068-4cf2-9649-f57ff9eff535",
+            "name": "postHiringProcessCategory",
+            "url": "{{DEPLOYED_API}}/hiring-process-categories",
+            "method": "POST",
+            "sortNum": 110000,
+            "created": "2024-05-01T01:23:25.543Z",
+            "modified": "2024-05-01T01:54:58.196Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n \"number\": \"6000\",\n \"title\": \"Inversión Pública del Clasificador por Objeto del Gasto\",\n \"internationalPolicy\": [\"6631a00021cebc3f8ac85420\", \"6631a00c21cebc3f8ac85426\", \"6631a01121cebc3f8ac85428\", \"6631a01121cebc3f8ac85428\"]\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "8d3757d5-551e-49ca-be7a-aafcc36bd25f",
+            "colId": "5b0c0aae-365b-4493-9cf6-0d51fecf69d8",
+            "containerId": "5d7189fa-cc2d-427c-a160-8b869f24f3e5",
+            "name": "postInternationalPolicy",
+            "url": "{{DEPLOYED_API}}/international-policies",
+            "method": "POST",
+            "sortNum": 120000,
+            "created": "2024-05-01T01:25:12.620Z",
+            "modified": "2024-05-01T01:50:53.389Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\": \"TLC MX-CL\"\n}",
+                "form": []
+            }
+        }
+    ],
+    "ref": "qD0uBC_fWFEpuxc8Rpb9799GJW94viNGbOtI17CMagLwNZnuw6wnMRmsL08nJdBWAP97VmRegUhJiaKGdClnjw"
+}
