@@ -1,0 +1,23 @@
+{
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "tailwindCSS.emmetCompletions": false,
+  "tailwindCSS.includeLanguages": {
+    "html": "html",
+    "javascript": "javascript",
+    "css": "css"
+  },
+  "inlineFold.maskChar": "?",
+  "inlineFold.maskColor": "#fcba03",
+  "inlineFold.supportedLanguages": [
+    "astro",
+    "vue",
+    "javascriptreact",
+    "typescriptreact"
+  ],
+  "editor.formatOnSave": true
+}

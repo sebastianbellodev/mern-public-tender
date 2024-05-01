@@ -12,7 +12,5 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     runs-on: ubuntu-latest
-    environment:
-      name: user
     steps:
-      - run: echo "Hello, World!"
+      - run: echo "Hello, World! This is me, ${{ github.actor }}"

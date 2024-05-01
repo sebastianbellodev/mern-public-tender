@@ -3,6 +3,8 @@ import jwt from 'jsonwebtoken';
 import status from '../../json/status.js';
 import error from '../../json/error.js';
 
+export const JWT_KEY = process.env.JWT_KEY;
+
 export const tokenize = (payload) => {
   return new Promise((resolve, reject) => {
     jwt.sign(payload, JWT_KEY, { expiresIn: '1h' }, (err, token) => {
