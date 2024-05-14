@@ -7,7 +7,7 @@ import error from '../json/error.js';
 import { tokenize, JWT_KEY } from '../middleware/jwt/jwt.js';
 
 export const signup = async (req, res) => {
-  const { email, password, username } = req.body;
+  const { email, password, username, name, lastname } = req.body;
   try {
     const duplicate = await User.findOne({
       username,
@@ -24,6 +24,8 @@ export const signup = async (req, res) => {
       username,
       email,
       password: hash,
+      name,
+      lastname,
     });
 
     const user = await document.save();
@@ -63,7 +65,12 @@ export const login = async (req, res) => {
     const token = await tokenize({ id: user._id });
 
     res.cookie('token', token);
-    return res.sendStatus(status.NO_CONTENT);
+    return res.status(status.OK).json({
+      username: user.username,
+      email: user.email,
+      name: user.name,
+      lastname: user.lastname,
+    });
   } catch (err) {
     if (process.env.NODE_ENV === 'development') {
       return res

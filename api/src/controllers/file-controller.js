@@ -7,11 +7,12 @@ export const getFile = async (req, res) => {
     const files = await File.find()
       .where({ deleted: false })
       .populate([
+        { path: 'operator' },
         { path: 'hiring' },
         { path: 'law' },
-        { path: 'assessment' },
+        { path: 'assessmentMetric' },
         { path: 'hiringProcessCategory' },
-        { path: 'internationalPolicy' },
+        { path: 'internationalPolicies' },
       ]);
 
     if (files.length === 0) {
@@ -36,11 +37,12 @@ export const getFileById = async (req, res) => {
     const file = await File.findById(req.params.id)
       .where({ deleted: false })
       .populate([
+        { path: 'operator' },
         { path: 'hiring' },
         { path: 'law' },
-        { path: 'assessment' },
+        { path: 'assessmentMetric' },
         { path: 'hiringProcessCategory' },
-        { path: 'internationalPolicy' },
+        { path: 'internationalPolicies' },
       ]);
 
     if (!file) {

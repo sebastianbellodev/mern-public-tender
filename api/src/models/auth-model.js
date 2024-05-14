@@ -20,6 +20,16 @@ const AUTH_SCHEMA = new moongose.Schema({
     required: true,
     trim: true,
   },
+  name: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  lastname: {
+    type: String,
+    required: true,
+    trim: true,
+  },
   deleted: {
     type: Boolean,
     default: false,

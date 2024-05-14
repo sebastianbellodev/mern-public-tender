@@ -1,4 +1,4 @@
-import AssessmentCriteria from '../models/assessment-criteria-model.js';
+import AssessmentCriteria from '../models/assessment-metric-model.js';
 import status from '../json/status.js';
 import error from '../json/error.js';
 

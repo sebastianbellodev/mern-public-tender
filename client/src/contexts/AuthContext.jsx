@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { createContext, useContext, useEffect, useState } from 'react';
 import {
   signupRequest,
@@ -41,7 +42,8 @@ export const AuthProvider = ({ children }) => {
     try {
       const res = await loginRequest(values);
       setAuthenticated(true);
-      setUser(res.data);
+      // setUser(res.data);
+      setUser(values);
     } catch (error) {
       if (Array.isArray(error.response.data)) {
         return setErrors(error.response.data);

@@ -7,7 +7,7 @@ export const JWT_KEY = process.env.JWT_KEY;
 
 export const tokenize = (payload) => {
   return new Promise((resolve, reject) => {
-    jwt.sign(payload, JWT_KEY, { expiresIn: '1h' }, (err, token) => {
+    jwt.sign(payload, JWT_KEY, { expiresIn: '2h' }, (err, token) => {
       if (err) {
         return reject(err);
       }

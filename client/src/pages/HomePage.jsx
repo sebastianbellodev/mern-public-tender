@@ -1,8 +1,8 @@
 function HomePage() {
   return (
-    <div className="flex items-center justify-center text-4xl h-[60vh] font-black text-gray-hover">
-      Home
-    </div>
+    <main className="flex justify-center items-center">
+      <h1 className="text-3xl font-black text-gray-hover">Home</h1>
+    </main>
   );
 }
 

@@ -8,8 +8,38 @@ const FILE_SCHEMA = z.object({
     .min(1, {
       message: 'ID must be at least 1 character long',
     })
-    .max(15, {
-      message: 'ID must be at most 15 characters long',
+    .max(10, {
+      message: 'ID must be at most 10 characters long',
+    }),
+  description: z
+    .string({
+      required_error: 'Description is required',
+    })
+    .min(1, {
+      message: 'Description must be at least 1 character long',
+    })
+    .max(255, {
+      message: 'Description must be at most 255 characters long',
+    }),
+  reference: z
+    .string({
+      required_error: 'Reference is required',
+    })
+    .min(1, {
+      message: 'Reference must be at least 1 character long',
+    })
+    .max(17, {
+      message: 'Reference must be at most 17 characters long',
+    }),
+  operator: z
+    .string({
+      required_error: 'Operator is required',
+    })
+    .min(1, {
+      message: 'Operator must be at least 1 character long',
+    })
+    .max(24, {
+      message: 'Operator must be at most 24 characters long',
     }),
   budgetaryYear: z
     .string({
@@ -26,16 +56,6 @@ const FILE_SCHEMA = z.object({
       required_error: 'Date is required',
     })
     .optional(),
-  description: z
-    .string({
-      required_error: 'Description is required',
-    })
-    .min(1, {
-      message: 'Description must be at least 1 character long',
-    })
-    .max(255, {
-      message: 'Description must be at most 255 characters long',
-    }),
   addendum: z.string().optional(),
   hiring: z
     .string({
@@ -57,20 +77,6 @@ const FILE_SCHEMA = z.object({
     .max(24, {
       message: 'Law must be at most 24 characters long',
     }),
-  assessment: z
-    .string({
-      required_error: 'Assessment is required',
-    })
-    .min(1, {
-      message: 'Assessment must be at least 1 character long',
-    })
-    .max(24, {
-      message: 'Assessment must be at most 24 characters long',
-    }),
-  advancePayment: z.boolean({
-    required_error: 'Advance payment is required',
-  }),
-  porcentage: z.string().optional(),
   hiringProcessCategory: z
     .string({
       required_error: 'Hiring process is required',
@@ -81,7 +87,21 @@ const FILE_SCHEMA = z.object({
     .max(24, {
       message: 'Hiring process must be at most 24 characters long',
     }),
-  internationalPolicy: z.array(
+  assessmentMetric: z
+    .string({
+      required_error: 'Assessment metric is required',
+    })
+    .min(1, {
+      message: 'Assessment metric must be at least 1 character long',
+    })
+    .max(24, {
+      message: 'Assessment metric must be at most 24 characters long',
+    }),
+  advancePayment: z.boolean({
+    required_error: 'Advance payment is required',
+  }),
+  porcentage: z.string().optional(),
+  internationalPolicies: z.array(
     z
       .string({
         required_error: 'International policy is required',

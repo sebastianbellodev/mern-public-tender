@@ -7,6 +7,20 @@ const FILE_SCHEMA = new moongose.Schema({
     unique: true,
     trim: true,
   },
+  description: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  reference: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  operator: {
+    type: moongose.Schema.Types.ObjectId,
+    ref: 'users',
+  },
   budgetaryYear: {
     type: String,
     required: true,
@@ -15,11 +29,6 @@ const FILE_SCHEMA = new moongose.Schema({
   date: {
     type: Date,
     default: Date.now,
-  },
-  description: {
-    type: String,
-    required: true,
-    trim: true,
   },
   addendum: {
     type: String,
@@ -33,9 +42,13 @@ const FILE_SCHEMA = new moongose.Schema({
     type: moongose.Schema.Types.ObjectId,
     ref: 'laws',
   },
-  assessment: {
+  hiringProcessCategory: {
     type: moongose.Schema.Types.ObjectId,
-    ref: 'assessment-criterias',
+    ref: 'hiring-process-categories',
+  },
+  assessmentMetric: {
+    type: moongose.Schema.Types.ObjectId,
+    ref: 'assessment-metrics',
   },
   advancePayment: {
     type: Boolean,
@@ -44,11 +57,7 @@ const FILE_SCHEMA = new moongose.Schema({
     type: String,
     trim: true,
   },
-  hiringProcessCategory: {
-    type: moongose.Schema.Types.ObjectId,
-    ref: 'hiring-process-categories',
-  },
-  internationalPolicy: [
+  internationalPolicies: [
     {
       type: moongose.Schema.Types.ObjectId,
       ref: 'international-policies',

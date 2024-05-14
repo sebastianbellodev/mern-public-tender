@@ -8,9 +8,9 @@ const PORT = process.env.MONGODB_PORT;
 
 let CONNECTION_STRING = `mongodb+srv://${USER}:${PASSWORD}@${CLUSTER}.mongodb.net/${DATABASE}?retryWrites=true&w=majority`;
 
-if (process.env.NODE_ENV === 'development') {
-  CONNECTION_STRING = `mongodb://${USER}:${PASSWORD}@localhost:${PORT}/${DATABASE}?authSource=admin`;
-}
+// if (process.env.NODE_ENV === 'development') {
+//   CONNECTION_STRING = `mongodb://${USER}:${PASSWORD}@localhost:${PORT}/${DATABASE}?authSource=admin`;
+// }
 
 const connectToCluster = (callback) => {
   moongose.set('strictQuery', false);

@@ -12,7 +12,4 @@ const ASSESSMENT_CRITERIA_SCHEMA = new moongose.Schema({
   },
 });
 
-export default moongose.model(
-  'assessment-criterias',
-  ASSESSMENT_CRITERIA_SCHEMA
-);
+export default moongose.model('assessment-metrics', ASSESSMENT_CRITERIA_SCHEMA);

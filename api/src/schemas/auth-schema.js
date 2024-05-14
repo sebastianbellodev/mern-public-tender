@@ -25,12 +25,34 @@ const AUTH_SCHEMA = z.object({
       message: 'Email must be at most 30 characters long',
     }),
   password: z
-    .string({})
+    .string({
+      required_error: 'Password is required',
+    })
     .min(1, {
       message: 'Password must be at least 1 character long',
     })
     .max(15, {
       message: 'Password must be at most 15 characters long',
+    }),
+  name: z
+    .string({
+      required_error: 'Name is required',
+    })
+    .min(1, {
+      message: 'Name must be at least 1 character long',
+    })
+    .max(25, {
+      message: 'Name must be at most 25 characters long',
+    }),
+  lastname: z
+    .string({
+      required_error: 'Lastname is required',
+    })
+    .min(1, {
+      message: 'Lastname must be at least 1 character long',
+    })
+    .max(30, {
+      message: 'Lastname must be at most 30 characters long',
     }),
   deleted: z.boolean().default(false).optional(),
 });

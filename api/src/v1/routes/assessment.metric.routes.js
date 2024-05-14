@@ -6,13 +6,13 @@ import {
   postAssessmentCriteria,
   putAssessmentCriteria,
   deleteAssessmentCriteria,
-} from '../../controllers/assessment-criteria-controller.js';
+} from '../../controllers/assessment-metric-controller.js';
 import { checkToken } from '../../middleware/jwt/jwt.js';
 
 const router = Router();
 
-const ASSESSMENT_CRITERIA = '/assessment-criteria';
-const ASSESSMENT_CRITERIA_ID = '/assessment-criteria/:id';
+const ASSESSMENT_CRITERIA = '/assessment-metrics';
+const ASSESSMENT_CRITERIA_ID = '/assessment-metrics/:id';
 
 router.get(ASSESSMENT_CRITERIA, checkToken, getAssessmentCriteria);
 router.get(ASSESSMENT_CRITERIA_ID, checkToken, getAssessmentCriteriaById);

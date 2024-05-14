@@ -10,7 +10,7 @@ import hiringRouter from './v1/routes/hiring.routes.js';
 import hiringProcessCategoryRouter from './v1/routes/hiring.process.category.routes.js';
 import internationalPolicyRouter from './v1/routes/international.policy.routes.js';
 import lawRouter from './v1/routes/law.routes.js';
-import assessmentCriteriaRouter from './v1/routes/assessment.criteria.routes.js';
+import assessmentMetricRouter from './v1/routes/assessment.metric.routes.js';
 import authRouter from './v1/routes/auth.routes.js';
 import swaggerRouter from './v1/swagger.js';
 import status from './json/status.js';
@@ -22,14 +22,14 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 app.use(express.json());
-app.use(cookieParser());
-const ORIGIN = ['http://localhost:3000', `${process.env.URL}`];
+const ORIGIN = ['http://localhost:5173', `${process.env.CLIENT_CONTAINER_IP}`];
 app.use(
   cors({
-    origin: '*',
+    origin: 'http://localhost:5173',
     credentials: true,
   })
 );
+app.use(cookieParser());
 
 app.use(API, companyRouter);
 app.use(API, addressRouter);
@@ -38,7 +38,7 @@ app.use(API, fileRouter);
 app.use(API, hiringRouter);
 app.use(API, lawRouter);
 app.use(API, internationalPolicyRouter);
-app.use(API, assessmentCriteriaRouter);
+app.use(API, assessmentMetricRouter);
 app.use(API, hiringProcessCategoryRouter);
 // Docs router
 app.use(API, swaggerRouter);
