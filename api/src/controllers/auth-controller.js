@@ -65,7 +65,11 @@ export const login = async (req, res) => {
 
     const token = await tokenize({ id: user._id });
 
-    res.cookie('token', token);
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'none',
+    });
     return res.status(status.OK).json({
       _id: user._id,
       username: user.username,
@@ -114,15 +118,13 @@ export const verifyToken = async (req, res) => {
       if (!document)
         return res.status(status.UNAUTHORIZED).json(error.UNAUTHORIZED);
 
-      return res
-        .status(status.OK)
-        .json({
-          _id: document._id,
-          username: document.username,
-          email: document.email,
-          name: document.name,
-          lastname: document.lastname,
-        });
+      return res.status(status.OK).json({
+        _id: document._id,
+        username: document.username,
+        email: document.email,
+        name: document.name,
+        lastname: document.lastname,
+      });
     });
   } catch (err) {
     if (process.env.NODE_ENV === 'development') {

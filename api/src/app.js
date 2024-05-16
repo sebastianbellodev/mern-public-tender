@@ -28,6 +28,7 @@ app.use(
   cors({
     origin: process.env.NODE_ENV === 'development' ? DEV_CLIENT : PROD_CLIENT,
     credentials: true,
+    exposedHeaders: ['set-cookie'],
   })
 );
 app.use(cookieParser());
