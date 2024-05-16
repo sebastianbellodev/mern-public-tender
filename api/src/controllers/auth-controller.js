@@ -32,7 +32,16 @@ export const signup = async (req, res) => {
     const user = await document.save();
     const token = await tokenize({ id: document._id });
 
-    res.cookie('token', token);
+    if (process.env.NODE_ENV === 'development') {
+      res.cookie('token', token);
+    } else {
+      res.cookie('token', token, {
+        expires: new Date(Date.now() + 3600000),
+        httpOnly: true,
+        secure: true,
+        sameSite: 'none',
+      });
+    }
     return res.status(status.OK).json(user);
   } catch (err) {
     if (process.env.NODE_ENV === 'development') {
@@ -65,11 +74,16 @@ export const login = async (req, res) => {
 
     const token = await tokenize({ id: user._id });
 
-    res.cookie('token', token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: 'none',
-    });
+    if (process.env.NODE_ENV === 'development') {
+      res.cookie('token', token);
+    } else {
+      res.cookie('token', token, {
+        expires: new Date(Date.now() + 3600000),
+        httpOnly: true,
+        secure: true,
+        sameSite: 'none',
+      });
+    }
     return res.status(status.OK).json({
       _id: user._id,
       username: user.username,

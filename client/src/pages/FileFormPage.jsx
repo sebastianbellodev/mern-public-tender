@@ -258,7 +258,10 @@ function FileFormPage() {
               })}
               className="w-[18vw] sm:w-[16vw] md:w-[14vw] lg:w-[12vw] p-2 border-2 rounded-sm border-gray-666666"
             />
-            <label className="font-semibold text-gray-333333">
+            <label
+              htmlFor="description"
+              className="font-semibold text-gray-333333"
+            >
               Description
             </label>
             <textarea
@@ -376,7 +379,12 @@ function FileFormPage() {
                   : 'border-gray-cccccc text-gray-cccccc cursor-not-allowed'
               }`}
             />
-            <label className="font-semibold text-gray-333333">Category</label>
+            <label
+              htmlFor="hiringProcessCategory"
+              className="font-semibold text-gray-333333"
+            >
+              Category
+            </label>
             <p id="hiringProcessCategoryInstruction" className="break-all">
               Please select a hiring process category to display the
               international policies available.
@@ -386,13 +394,13 @@ function FileFormPage() {
                 <input
                   type="radio"
                   id={category._id}
+                  name="hiringProcessCategory"
                   {...register('hiringProcessCategory', {
                     required: {
                       value: true,
                       message: 'Hiring process category is required.',
                     },
                   })}
-                  name="hiringProcessCategory"
                   value={category._id}
                   onChange={(e) => setSelectedCategory(e.target.value)}
                   className="mr-2"
@@ -403,7 +411,12 @@ function FileFormPage() {
               </div>
             ))}
             <article className="flex flex-col gap-2 items-start">
-              <label className="font-semibold text-gray-333333">Policy</label>
+              <label
+                htmlFor="internationalPolicies"
+                className="font-semibold text-gray-333333"
+              >
+                Policy
+              </label>
               <div className="h-[16vh] w-[38vw] rounded-lg">
                 {selectedCategory &&
                   hiringProcessCategories
@@ -413,6 +426,7 @@ function FileFormPage() {
                         <input
                           type="checkbox"
                           id={policy._id}
+                          name="internationalPolicies"
                           {...register('internationalPolicies', {
                             required: {
                               value: true,
@@ -420,7 +434,6 @@ function FileFormPage() {
                             },
                           })}
                           value={policy._id || ''}
-                          name="internationalPolicies"
                           className="mr-2"
                         />
                         <label htmlFor={policy._id}>{policy.title}</label>
