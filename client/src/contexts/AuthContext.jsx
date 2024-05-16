@@ -30,11 +30,11 @@ export const AuthProvider = ({ children }) => {
       const res = await signupRequest(user);
       setUser(res.data);
       setAuthenticated(true);
-    } catch (error) {
-      if (Array.isArray(error.response.data)) {
-        return setErrors(error.response.data);
+    } catch (err) {
+      if (Array.isArray(err.response.data)) {
+        return setErrors(err.response.data.map((err) => err.error));
       }
-      setErrors([error.response.data]);
+      setErrors([err.rresponse.data.error]);
     }
   };
 
@@ -42,13 +42,13 @@ export const AuthProvider = ({ children }) => {
     try {
       const res = await loginRequest(values);
       setAuthenticated(true);
-      // setUser(res.data);
-      setUser(values);
-    } catch (error) {
-      if (Array.isArray(error.response.data)) {
-        return setErrors(error.response.data);
+      setUser(res.data);
+    } catch (err) {
+      console.log(err.response.data);
+      if (Array.isArray(err.response.data)) {
+        return setErrors(err.response.data.map((err) => err.error));
       }
-      setErrors([error.response.data]);
+      setErrors([err.response.data.error]);
     }
   };
 

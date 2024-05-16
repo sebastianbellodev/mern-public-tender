@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 import {
   getFilesRequest,
   getFileRequest,
@@ -23,13 +23,17 @@ export const useFileContext = () => {
 // eslint-disable-next-line react/prop-types
 export function FileProvider({ children }) {
   const [files, setFiles] = useState([]);
+  const [errors, setErrors] = useState([]);
 
   const getFiles = async () => {
     try {
       const res = await getFilesRequest();
       setFiles(res.data);
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      if (Array.isArray(err.response.data)) {
+        return setErrors(err.response.data.map((err) => err.error));
+      }
+      setErrors([err.rresponse.data.error]);
     }
   };
 
@@ -37,16 +41,22 @@ export function FileProvider({ children }) {
     try {
       const res = await getFileRequest(id);
       return res.data;
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      if (Array.isArray(err.response.data)) {
+        return setErrors(err.response.data.map((err) => err.error));
+      }
+      setErrors([err.rresponse.data.error]);
     }
   };
 
   const postFile = async (file) => {
     try {
       await postFileRequest(file);
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      if (Array.isArray(err.response.data)) {
+        return setErrors(err.response.data.map((err) => err.error));
+      }
+      setErrors([err.rresponse.data.error]);
     }
   };
 
@@ -54,22 +64,45 @@ export function FileProvider({ children }) {
     try {
       const res = await deleteFileRequest(id);
       if (res.status === 204) setFiles(files.filter((file) => file.id != id));
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      if (Array.isArray(err.response.data)) {
+        return setErrors(err.response.data.map((err) => err.error));
+      }
+      setErrors([err.rresponse.data.error]);
     }
   };
 
-  const putFile = async (id, task) => {
+  const putFile = async (id, file) => {
     try {
-      await putFileRequest(id, task);
-    } catch (error) {
-      console.log(error);
+      await putFileRequest(id, file);
+    } catch (err) {
+      if (Array.isArray(err.response.data)) {
+        return setErrors(err.response.data.map((err) => err.error));
+      }
+      setErrors([err.rresponse.data.error]);
     }
   };
+
+  useEffect(() => {
+    if (errors.length > 0) {
+      const timer = setTimeout(() => {
+        setErrors([]);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [errors]);
 
   return (
     <FileContext.Provider
-      value={{ files, getFiles, getFile, postFile, putFile, deleteFile }}
+      value={{
+        files,
+        getFiles,
+        getFile,
+        postFile,
+        putFile,
+        deleteFile,
+        errors,
+      }}
     >
       {children}
     </FileContext.Provider>

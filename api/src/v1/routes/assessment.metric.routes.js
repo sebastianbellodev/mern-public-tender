@@ -11,13 +11,13 @@ import { checkToken } from '../../middleware/jwt/jwt.js';
 
 const router = Router();
 
-const ASSESSMENT_CRITERIA = '/assessment-metrics';
-const ASSESSMENT_CRITERIA_ID = '/assessment-metrics/:id';
+const ASSESSMENT_METRICS = '/assessment-metrics';
+const ASSESSMENT_METRICS_ID = '/assessment-metrics/:id';
 
-router.get(ASSESSMENT_CRITERIA, checkToken, getAssessmentCriteria);
-router.get(ASSESSMENT_CRITERIA_ID, checkToken, getAssessmentCriteriaById);
-router.post(ASSESSMENT_CRITERIA, checkToken, postAssessmentCriteria);
-router.put(ASSESSMENT_CRITERIA_ID, checkToken, putAssessmentCriteria);
-router.delete(ASSESSMENT_CRITERIA_ID, checkToken, deleteAssessmentCriteria);
+router.get(ASSESSMENT_METRICS, checkToken, getAssessmentCriteria);
+router.get(ASSESSMENT_METRICS_ID, checkToken, getAssessmentCriteriaById);
+router.post(ASSESSMENT_METRICS, checkToken, postAssessmentCriteria);
+router.put(ASSESSMENT_METRICS_ID, checkToken, putAssessmentCriteria);
+router.delete(ASSESSMENT_METRICS_ID, checkToken, deleteAssessmentCriteria);
 
 export default router;

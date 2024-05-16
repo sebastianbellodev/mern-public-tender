@@ -4,9 +4,11 @@ import error from '../json/error.js';
 
 export const getHiringProcessCategory = async (req, res) => {
   try {
-    const hiringProcessCategories = await HiringProcessCategory.find().where({
-      deleted: false,
-    });
+    const hiringProcessCategories = await HiringProcessCategory.find()
+      .where({
+        deleted: false,
+      })
+      .populate('internationalPolicies');
 
     if (hiringProcessCategories.length === 0) {
       return res
@@ -31,7 +33,9 @@ export const getHiringProcessCategoryById = async (req, res) => {
   try {
     const hiringProcessCategory = await HiringProcessCategory.findById(
       req.params.id
-    ).where({ deleted: false });
+    )
+      .where({ deleted: false })
+      .populate('internationalPolicies');
 
     if (!hiringProcessCategory) {
       return res

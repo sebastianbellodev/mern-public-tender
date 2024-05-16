@@ -12,7 +12,7 @@ const HIRING_PROCESS_CATEGORY_SCHEMA = new moongose.Schema({
     required: true,
     trim: true,
   },
-  internationalPolicy: [
+  internationalPolicies: [
     {
       type: moongose.Schema.Types.ObjectId,
       ref: 'international-policies',

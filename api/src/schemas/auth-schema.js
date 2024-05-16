@@ -5,8 +5,8 @@ const AUTH_SCHEMA = z.object({
     .string({
       required_error: 'Username is required',
     })
-    .min(1, {
-      message: 'Username must be at least 1 character long',
+    .min(2, {
+      message: 'Username must be at least 2 character long',
     })
     .max(15, {
       message: 'Username must be at most 15 characters long',
@@ -18,8 +18,8 @@ const AUTH_SCHEMA = z.object({
     .email({
       message: 'Invalid email format',
     })
-    .min(1, {
-      message: 'Email must be at least 1 character long',
+    .min(15, {
+      message: 'Email must be at least 15 character long',
     })
     .max(30, {
       message: 'Email must be at most 30 characters long',
@@ -29,17 +29,17 @@ const AUTH_SCHEMA = z.object({
       required_error: 'Password is required',
     })
     .min(1, {
-      message: 'Password must be at least 1 character long',
+      message: 'Password must be at least 8 character long',
     })
-    .max(15, {
-      message: 'Password must be at most 15 characters long',
+    .max(30, {
+      message: 'Password must be at most 30 characters long',
     }),
   name: z
     .string({
       required_error: 'Name is required',
     })
-    .min(1, {
-      message: 'Name must be at least 1 character long',
+    .min(2, {
+      message: 'Name must be at least 2 character long',
     })
     .max(25, {
       message: 'Name must be at most 25 characters long',
@@ -48,8 +48,8 @@ const AUTH_SCHEMA = z.object({
     .string({
       required_error: 'Lastname is required',
     })
-    .min(1, {
-      message: 'Lastname must be at least 1 character long',
+    .min(2, {
+      message: 'Lastname must be at least 2 character long',
     })
     .max(30, {
       message: 'Lastname must be at most 30 characters long',

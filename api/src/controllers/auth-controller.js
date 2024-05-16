@@ -21,6 +21,7 @@ export const signup = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
     const document = new User({
+      _id,
       username,
       email,
       password: hash,
@@ -66,6 +67,7 @@ export const login = async (req, res) => {
 
     res.cookie('token', token);
     return res.status(status.OK).json({
+      _id: user._id,
       username: user.username,
       email: user.email,
       name: user.name,
@@ -114,7 +116,13 @@ export const verifyToken = async (req, res) => {
 
       return res
         .status(status.OK)
-        .json({ username: document.username, email: document.email });
+        .json({
+          _id: document._id,
+          username: document.username,
+          email: document.email,
+          name: document.name,
+          lastname: document.lastname,
+        });
     });
   } catch (err) {
     if (process.env.NODE_ENV === 'development') {

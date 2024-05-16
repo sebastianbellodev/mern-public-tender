@@ -16,20 +16,20 @@ const FILE_SCHEMA = z.object({
       required_error: 'Description is required',
     })
     .min(1, {
-      message: 'Description must be at least 1 character long',
+      message: 'Description must be at least 16 character long',
     })
     .max(255, {
-      message: 'Description must be at most 255 characters long',
+      message: 'Description must be at most 20 characters long',
     }),
   reference: z
     .string({
       required_error: 'Reference is required',
     })
-    .min(1, {
-      message: 'Reference must be at least 1 character long',
+    .min(16, {
+      message: 'Reference must be at least 16 character long',
     })
-    .max(17, {
-      message: 'Reference must be at most 17 characters long',
+    .max(20, {
+      message: 'Reference must be at most 20 characters long',
     }),
   operator: z
     .string({
@@ -56,7 +56,15 @@ const FILE_SCHEMA = z.object({
       required_error: 'Date is required',
     })
     .optional(),
-  addendum: z.string().optional(),
+  addendum: z
+    .string()
+    .min(1, {
+      message: 'Addendum must be at least 1 character long',
+    })
+    .max(255, {
+      message: 'Addendum must be at most 255 characters long',
+    })
+    .optional(),
   hiring: z
     .string({
       required_error: 'Hiring is required',
@@ -97,10 +105,21 @@ const FILE_SCHEMA = z.object({
     .max(24, {
       message: 'Assessment metric must be at most 24 characters long',
     }),
-  advancePayment: z.boolean({
-    required_error: 'Advance payment is required',
-  }),
-  porcentage: z.string().optional(),
+  advancePayment: z
+    .boolean({
+      required_error: 'Advance payment is required',
+    })
+    .default(false)
+    .optional(),
+  percentage: z
+    .string()
+    .min(1, {
+      message: 'Percentage must be at least 1 character long',
+    })
+    .max(2, {
+      message: 'Percentage must be at most 2 characters long',
+    })
+    .optional(),
   internationalPolicies: z.array(
     z
       .string({

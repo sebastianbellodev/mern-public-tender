@@ -19,6 +19,7 @@ const FILE_SCHEMA = new moongose.Schema({
   },
   operator: {
     type: moongose.Schema.Types.ObjectId,
+    required: true,
     ref: 'users',
   },
   budgetaryYear: {
@@ -36,24 +37,28 @@ const FILE_SCHEMA = new moongose.Schema({
   },
   hiring: {
     type: moongose.Schema.Types.ObjectId,
+    required: true,
     ref: 'hirings',
   },
   law: {
     type: moongose.Schema.Types.ObjectId,
+    required: true,
     ref: 'laws',
   },
   hiringProcessCategory: {
     type: moongose.Schema.Types.ObjectId,
+    required: true,
     ref: 'hiring-process-categories',
   },
   assessmentMetric: {
     type: moongose.Schema.Types.ObjectId,
+    required: true,
     ref: 'assessment-metrics',
   },
   advancePayment: {
     type: Boolean,
   },
-  porcentage: {
+  percentage: {
     type: String,
     trim: true,
   },
