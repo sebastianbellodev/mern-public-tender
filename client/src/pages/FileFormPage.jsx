@@ -124,7 +124,6 @@ function FileFormPage() {
     } else {
       postFile(file);
     }
-    navigate('/hirings');
   });
 
   return (
