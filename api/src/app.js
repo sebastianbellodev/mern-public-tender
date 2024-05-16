@@ -22,10 +22,11 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 app.use(express.json());
-const ORIGIN = ['http://localhost:5173', process.env.CLIENT_URL];
+const ORIGIN = ['http://localhost:5173'];
+const PROD_CLIENT = process.env.CLIENT_URL;
 app.use(
   cors({
-    origin: '*',
+    origin: [PROD_CLIENT],
     credentials: true,
   })
 );
