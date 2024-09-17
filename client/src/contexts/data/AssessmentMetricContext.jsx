@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from 'react';
-import { getAssessmentMetricsRequest } from '../api/routes/assessment.metric.routes.js';
+import { getAssessmentMetricsRequest } from '../../api/routes/assessment.metric.routes.js';
 
 const AssessmentMetricContext = createContext();
 
@@ -19,19 +19,30 @@ export const useAssessmentMetricContext = () => {
 // eslint-disable-next-line react/prop-types
 export function AssessmentMetricProvider({ children }) {
   const [assessmentMetrics, setAssessmentMetrics] = useState([]);
+  const [errors, setErrors] = useState([]);
 
   const getAssessmentMetrics = async () => {
     try {
       const res = await getAssessmentMetricsRequest();
       setAssessmentMetrics(res.data);
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      const { response: { data: { error } = {} } = {} } = err;
+
+      if (Array.isArray(error.issues)) {
+        return setErrors(error.issues.map((issue) => issue.message));
+      }
+
+      if (Array.isArray(error)) {
+        return setErrors(error);
+      }
+
+      setErrors([error]);
     }
   };
 
   return (
     <AssessmentMetricContext.Provider
-      value={{ assessmentMetrics, getAssessmentMetrics }}
+      value={{ assessmentMetrics, getAssessmentMetrics, errors }}
     >
       {children}
     </AssessmentMetricContext.Provider>

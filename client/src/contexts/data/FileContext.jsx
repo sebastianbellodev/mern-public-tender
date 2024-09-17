@@ -5,7 +5,7 @@ import {
   postFileRequest,
   deleteFileRequest,
   putFileRequest,
-} from '../api/routes/file.routes.js';
+} from '../../api/routes/file.routes.js';
 
 const FileContext = createContext();
 
@@ -30,10 +30,17 @@ export function FileProvider({ children }) {
       const res = await getFilesRequest();
       setFiles(res.data);
     } catch (err) {
-      if (Array.isArray(err.response.data)) {
-        return setErrors(err.response.data.map((err) => err.error));
+      const { response: { data: { error } = {} } = {} } = err;
+
+      if (Array.isArray(error.issues)) {
+        return setErrors(error.issues.map((issue) => issue.message));
       }
-      setErrors([err.rresponse.data.error]);
+
+      if (Array.isArray(error)) {
+        return setErrors(error);
+      }
+
+      setErrors([error]);
     }
   };
 
@@ -42,21 +49,36 @@ export function FileProvider({ children }) {
       const res = await getFileRequest(id);
       return res.data;
     } catch (err) {
-      if (Array.isArray(err.response.data)) {
-        return setErrors(err.response.data.map((err) => err.error));
+      const { response: { data: { error } = {} } = {} } = err;
+
+      if (Array.isArray(error.issues)) {
+        return setErrors(error.issues.map((issue) => issue.message));
       }
-      setErrors([err.rresponse.data.error]);
+
+      if (Array.isArray(error)) {
+        return setErrors(error);
+      }
+
+      setErrors([error]);
     }
   };
 
   const postFile = async (file) => {
     try {
-      await postFileRequest(file);
+      const res = await postFileRequest(file);
+      return res;
     } catch (err) {
-      if (Array.isArray(err.response.data)) {
-        return setErrors(err.response.data.map((err) => err.error));
+      const { response: { data: { error } = {} } = {} } = err;
+
+      if (Array.isArray(error.issues)) {
+        return setErrors(error.issues.map((issue) => issue.message));
       }
-      setErrors([err.rresponse.data.error]);
+
+      if (Array.isArray(error)) {
+        return setErrors(error);
+      }
+
+      setErrors([error]);
     }
   };
 
@@ -65,21 +87,36 @@ export function FileProvider({ children }) {
       const res = await deleteFileRequest(id);
       if (res.status === 204) setFiles(files.filter((file) => file.id != id));
     } catch (err) {
-      if (Array.isArray(err.response.data)) {
-        return setErrors(err.response.data.map((err) => err.error));
+      const { response: { data: { error } = {} } = {} } = err;
+
+      if (Array.isArray(error.issues)) {
+        return setErrors(error.issues.map((issue) => issue.message));
       }
-      setErrors([err.rresponse.data.error]);
+
+      if (Array.isArray(error)) {
+        return setErrors(error);
+      }
+
+      setErrors([error]);
     }
   };
 
   const putFile = async (id, file) => {
     try {
-      await putFileRequest(id, file);
+      const res = await putFileRequest(id, file);
+      return res;
     } catch (err) {
-      if (Array.isArray(err.response.data)) {
-        return setErrors(err.response.data.map((err) => err.error));
+      const { response: { data: { error } = {} } = {} } = err;
+
+      if (Array.isArray(error.issues)) {
+        return setErrors(error.issues.map((issue) => issue.message));
       }
-      setErrors([err.rresponse.data.error]);
+
+      if (Array.isArray(error)) {
+        return setErrors(error);
+      }
+
+      setErrors([error]);
     }
   };
 

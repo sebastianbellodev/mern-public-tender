@@ -1,27 +1,57 @@
+/* eslint-disable no-undef */
+
 /** @type {import('tailwindcss').Config} */
-export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+module.exports = {
+  darkMode: ['class'],
+  content: [
+    './pages/**/*.{js,jsx}',
+    './components/**/*.{js,jsx}',
+    './app/**/*.{js,jsx}',
+    './src/**/*.{js,jsx}',
+  ],
+  prefix: '',
   theme: {
+    container: {
+      center: true,
+      padding: '2rem',
+      screens: {
+        '2xl': '1400px',
+      },
+    },
     extend: {
       colors: {
-        gray: {
-          cccccc: '#CCCCCC',
-          666666: '#666666',
-          333333: '#333333',
-          999999: '#999999',
+        light: '#ffffff',
+        dark: 'hsl(0, 0%, 3.9%)',
+      },
+      keyframes: {
+        'accordion-down': {
+          from: { height: '0' },
+          to: { height: 'var(--radix-accordion-content-height)' },
         },
-        blue: {
-          '0033ff': '#0033FF',
-          '0066ff': '#0066FF',
+        'accordion-up': {
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0' },
         },
-        red: {
-          ff0000: '#FF0000',
-          ff6666: '#FF6666',
-          cc3333: '#CC3333',
-          660000: '#660000',
-        },
+      },
+      animation: {
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwindcss-animate'),
+    require('tailwind-scrollbar-hide'),
+    function ({ addUtilities }) {
+      addUtilities({
+        '.hide-scrollbar': {
+          '-ms-overflow-style': 'none' /* IE and Edge */,
+          'scrollbar-width': 'none' /* Firefox */,
+        },
+        '.hide-scrollbar::-webkit-scrollbar': {
+          display: 'none' /* Chrome, Safari, and Opera */,
+        },
+      });
+    },
+  ],
 };

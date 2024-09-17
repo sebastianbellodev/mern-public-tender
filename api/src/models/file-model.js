@@ -1,12 +1,6 @@
 import moongose from 'mongoose';
 
 const FILE_SCHEMA = new moongose.Schema({
-  id: {
-    type: String,
-    required: true,
-    unique: true,
-    trim: true,
-  },
   description: {
     type: String,
     required: true,

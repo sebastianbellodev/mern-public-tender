@@ -1,122 +1,128 @@
+'use client';
+
 import { useForm } from 'react-hook-form';
-import { useNavigate, Link } from 'react-router-dom';
-import { useAuthContext } from '../contexts/AuthContext.jsx';
 import { useEffect } from 'react';
-import warning from '../assets/warning.svg';
+import { useNavigate, Link } from 'react-router-dom';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { AlertCircle } from 'lucide-react';
 
-function LoginPage() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isValid },
-  } = useForm({ mode: 'onBlur' });
+import { Button } from '@/components/ui/button';
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
-  const { login, authenticated, errors: loginErrors } = useAuthContext();
+import { useAuthContext } from '../contexts/data/AuthContext.jsx';
+
+const formSchema = z.object({
+  username: z.string().min(2, {
+    message: 'Username must be at least 2 characters.',
+  }),
+  password: z.string().min(8, {
+    message: 'Password must be at least 8 characters.',
+  }),
+});
+
+function ProfileForm() {
+  const { login, authenticated, errors: formErrors } = useAuthContext();
 
   const navigate = useNavigate();
   useEffect(() => {
-    if (authenticated) navigate('/hirings');
+    if (authenticated) navigate('/');
   }, [authenticated, navigate]);
 
-  const onSubmit = handleSubmit((values) => login(values));
+  const form = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      username: '',
+      password: '',
+    },
+  });
+
+  const onSubmit = (values) => login(values);
 
   return (
-    <main className="flex items-center justify-center">
-      <section className="flex flex-col justify-center items-start gap-4 p-8 mt-8 w-[70vw] sm:w-[60vw] md:w-[50vw] lg:w-[35vw] shadow-xl">
-        <p className="text-lg font-bold">
-          Don&#39;t have an account?{' '}
-          <Link to="/signup" className="text-blue-700 hover:text-blue-0033FF">
-            Sign up
-          </Link>
-        </p>
-
-        <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-3xl font-extrabold text-center text-black">
-          Log in to your account
-        </h1>
-
-        {(Object.keys(errors).length > 0 || loginErrors?.length > 0) && (
-          <section className="flex items-center h-fit w-full p-4 bg-red-200 rounded-sm border-red-300 border-[1.5px]">
-            <img src={warning} alt="warning" className="h-7" />
-            {loginErrors.map((err, i) => (
-              <p className="ml-3 text-red-660000 break-all" key={i}>
-                {err}
-              </p>
-            ))}
-            {errors.username && (
-              <p className="ml-3 text-red-660000 break-all">
-                {errors.username.message}
-              </p>
-            )}
-            {errors.password && (
-              <p className="ml-3 text-red-660000 break-all">
-                {errors.password.message}
-              </p>
-            )}
-          </section>
-        )}
-
-        <form onSubmit={onSubmit} className="flex flex-col w-full gap-2">
-          <label htmlFor="username" className="font-semibold text-gray-333333">
-            Username
-          </label>
-          <input
-            type="text"
-            id="username"
-            {...register('username', {
-              required: {
-                value: true,
-                message: 'Username is required.',
-              },
-              minLength: {
-                value: 2,
-                message: 'Username must be at least 2 characters long.',
-              },
-              maxLength: {
-                value: 15,
-                message: 'Username cannot be more than 15 characters long.',
-              },
-            })}
-            className="w-full p-2 border-2 rounded-sm border-gray-666666"
-          />
-          <label htmlFor="password" className="font-semibold text-gray-333333">
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            {...register('password', {
-              required: {
-                value: true,
-                message: 'Password is required.',
-              },
-              minLength: {
-                value: 8,
-                message: 'Password must be at least 8 characters long.',
-              },
-              maxLength: {
-                value: 30,
-                message: 'Password cannot be more than 30 characters long.',
-              },
-            })}
-            className="w-full p-2 border-2 rounded-sm border-gray-666666"
-          />
-          <div className="mt-2">
-            <button
-              type="submit"
-              disabled={!isValid}
-              className={`p-2 w-[20vw] sm:p-2 sm:w-[16vw] md:p-3 md:w-[12vw] lg:p-3 lg:w-[8vw] rounded-md font-bold ${
-                isValid
-                  ? 'bg-gray-333333 hover:bg-gray-666666 text-white'
-                  : 'bg-gray-cccccc text-gray-666666 cursor-not-allowed'
-              }`}
+    <main className="pt-[10vh] flex justify-center items-center w-screen h-screen scrollbar-hide">
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-5 w-[40vw] lg:w-[30vw] scrollbar-hide"
+        >
+          <h1 className="scroll-m-20 text-3xl font-extrabold tracking-tight lg:text-4xl">
+            Sign in to your account
+          </h1>
+          <FormDescription className="scroll-m-20 text-xl font-semibold tracking-tight text-gray-800 dark:text-white ">
+            Do not have an account?{' '}
+            <Link className="font-extrabold text-blue-700 dark:text-blue-300">
+              Sign up
+            </Link>
+          </FormDescription>
+          {formErrors.map((error, index) => (
+            <Alert
+              key={index}
+              variant="destructive"
+              className="dark:border-red-600 border-2"
             >
-              Sign in
-            </button>
-          </div>
+              <AlertCircle style={{ color: '#F87171' }} className="h-4 w-4" />
+              <AlertTitle className="text-lg font-semibold dark:text-red-400">
+                Error
+              </AlertTitle>
+              <AlertDescription className="dark:text-red-400">
+                {error}
+              </AlertDescription>
+            </Alert>
+          ))}
+          <FormField
+            control={form.control}
+            name="username"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel
+                  className={`text-lg font-semibold ${
+                    form.formState.errors.username ? 'dark:text-red-400' : null
+                  }`}
+                >
+                  Username
+                </FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
+                <FormMessage className="dark:text-red-400" />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel
+                  className={`text-lg font-semibold ${
+                    form.formState.errors.password ? 'dark:text-red-400' : null
+                  }`}
+                >
+                  Password
+                </FormLabel>
+                <FormControl>
+                  <Input type="password" {...field} />
+                </FormControl>
+                <FormMessage className="dark:text-red-400" />
+              </FormItem>
+            )}
+          />
+          <Button type="submit">Submit</Button>
         </form>
-      </section>
+      </Form>
     </main>
   );
 }
 
-export default LoginPage;
+export default ProfileForm;

@@ -32,7 +32,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Label } from '@/components/ui/label';
-import { useFileContext } from '../../contexts/data/FileContext.jsx';
+import { useCompanyContext } from '../../contexts/data/CompanyContext.jsx';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -41,13 +41,13 @@ function DataTableDemo() {
   const [columnFilters, setColumnFilters] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({});
   const [rowSelection, setRowSelection] = useState({});
-  const { files, getFiles, deleteFile } = useFileContext();
+  const { companies, getCompanies, deleteCompany } = useCompanyContext();
   const [filtering, setFiltering] = useState('');
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    getFiles();
+    getCompanies();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -75,67 +75,36 @@ function DataTableDemo() {
       enableHiding: false,
     },
     {
-      accessorKey: '_id',
+      accessorKey: 'rfc',
       header: ({ column }) => (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         >
-          ID
+          RFC
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       ),
-      cell: ({ row }) => (
-        <div className="capitalize">{row.getValue('_id').substring(0, 8)}</div>
-      ),
+      cell: ({ row }) => <div>{row.getValue('rfc')}</div>,
     },
     {
-      accessorKey: 'description',
+      accessorKey: 'name',
       header: ({ column }) => (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         >
-          Description
+          Name
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       ),
-      cell: ({ row }) => <div>{row.getValue('description')}</div>,
-    },
-    {
-      accessorKey: 'reference',
-      header: ({ column }) => (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Reference
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      ),
-      cell: ({ row }) => <div>{row.getValue('reference')}</div>,
-    },
-    {
-      accessorKey: 'operator',
-      header: ({ column }) => (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Operator
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      ),
-      cell: ({ row }) => {
-        const operator = row.getValue('operator');
-        return <div>{`${operator.name} ${operator.lastname}`}</div>;
-      },
+      cell: ({ row }) => <div>{row.getValue('name')}</div>,
     },
     {
       id: 'actions',
       enableHiding: false,
       cell: ({ row }) => {
-        const file = row.original;
+        const company = row.original;
 
         return (
           <DropdownMenu>
@@ -148,17 +117,19 @@ function DataTableDemo() {
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuItem
-                onClick={() => navigator.clipboard.writeText(file._id)}
+                onClick={() => navigator.clipboard.writeText(company.rfc)}
               >
-                Copy file ID
+                Copy supplier RFC
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => navigate(`/files/${file._id}`)}>
+              <DropdownMenuItem
+                onClick={() => navigate(`/suppliers/${company.id}`)}
+              >
                 Edit file details
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={() => {
-                  deleteFile(file._id);
+                  deleteCompany(company.id);
                   window.location.reload();
                 }}
               >
@@ -172,7 +143,7 @@ function DataTableDemo() {
   ];
 
   const table = useReactTable({
-    data: files,
+    data: companies,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -208,7 +179,7 @@ function DataTableDemo() {
             onChange={(e) => setFiltering(e.target.value)}
             className="w-[25vw]"
           />
-          <Button onClick={() => navigate('/files')}>Add</Button>
+          <Button onClick={() => navigate('/suppliers')}>Add</Button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="ml-auto">
@@ -218,7 +189,7 @@ function DataTableDemo() {
             <DropdownMenuContent align="end">
               {table
                 .getAllColumns()
-                .filter((column) => column.getCanHide() && column.id !== '_id')
+                .filter((column) => column.getCanHide() && column.id !== 'id')
                 .map((column) => (
                   <DropdownMenuCheckboxItem
                     key={column.id}

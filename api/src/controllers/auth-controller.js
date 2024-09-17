@@ -36,10 +36,9 @@ export const signup = async (req, res) => {
       res.cookie('token', token);
     } else {
       res.cookie('token', token, {
-        expires: new Date(Date.now() + 3600000),
         httpOnly: true,
         secure: true,
-        sameSite: 'none',
+        sameSite: 'None',
       });
     }
     return res.status(status.OK).json(user);
@@ -78,10 +77,9 @@ export const login = async (req, res) => {
       res.cookie('token', token);
     } else {
       res.cookie('token', token, {
-        expires: new Date(Date.now() + 3600000),
         httpOnly: true,
         secure: true,
-        sameSite: 'none',
+        sameSite: 'None',
       });
     }
     return res.status(status.OK).json({

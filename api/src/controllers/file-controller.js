@@ -91,7 +91,13 @@ export const deleteFile = async (req, res) => {
 
 export const putFile = async (req, res) => {
   try {
-    const file = await File.findByIdAndUpdate(req.params.id, req.body, {
+    const document = { ...req.body };
+
+    if (!req.body.hasOwnProperty('addendum')) {
+      document.$unset = { addendum: '' };
+    }
+
+    const file = await File.findByIdAndUpdate(req.params.id, document, {
       new: true,
     }).where({ deleted: false });
 

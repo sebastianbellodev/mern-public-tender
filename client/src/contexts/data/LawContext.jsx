@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from 'react';
-import { getLawsRequest } from '../api/routes/law.routes.js';
+import { getLawsRequest } from '../../api/routes/law.routes.js';
 
 const LawContext = createContext();
 
@@ -17,18 +17,29 @@ export const useLawContext = () => {
 // eslint-disable-next-line react/prop-types
 export function LawProvider({ children }) {
   const [laws, setLaws] = useState([]);
+  const [errors, setErrors] = useState([]);
 
   const getLaws = async () => {
     try {
       const res = await getLawsRequest();
       setLaws(res.data);
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      const { response: { data: { error } = {} } = {} } = err;
+
+      if (Array.isArray(error.issues)) {
+        return setErrors(error.issues.map((issue) => issue.message));
+      }
+
+      if (Array.isArray(error)) {
+        return setErrors(error);
+      }
+
+      setErrors([error]);
     }
   };
 
   return (
-    <LawContext.Provider value={{ laws, getLaws }}>
+    <LawContext.Provider value={{ laws, getLaws, errors }}>
       {children}
     </LawContext.Provider>
   );

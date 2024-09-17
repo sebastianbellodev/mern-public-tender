@@ -1,16 +1,6 @@
 import { z } from 'zod';
 
 const FILE_SCHEMA = z.object({
-  id: z
-    .string({
-      required_error: 'ID is required',
-    })
-    .min(1, {
-      message: 'ID must be at least 1 character long',
-    })
-    .max(10, {
-      message: 'ID must be at most 10 characters long',
-    }),
   description: z
     .string({
       required_error: 'Description is required',
@@ -19,7 +9,7 @@ const FILE_SCHEMA = z.object({
       message: 'Description must be at least 16 character long',
     })
     .max(255, {
-      message: 'Description must be at most 20 characters long',
+      message: 'Description must be at most 255 characters long',
     }),
   reference: z
     .string({

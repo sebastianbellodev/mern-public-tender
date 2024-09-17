@@ -4,7 +4,7 @@ import {
   signupRequest,
   loginRequest,
   verifyTokenRequest,
-} from '../api/routes/auth.routes.js';
+} from '../../api/routes/auth.routes.js';
 import Cookies from 'js-cookie';
 
 export const AuthContext = createContext();
@@ -31,10 +31,17 @@ export const AuthProvider = ({ children }) => {
       setUser(res.data);
       setAuthenticated(true);
     } catch (err) {
-      if (Array.isArray(err.response.data)) {
-        return setErrors(err.response.data.map((err) => err.error));
+      const { response: { data: { error } = {} } = {} } = err;
+
+      if (Array.isArray(error.issues)) {
+        return setErrors(error.issues.map((issue) => issue.message));
       }
-      setErrors([err.rresponse.data.error]);
+
+      if (Array.isArray(error)) {
+        return setErrors(error);
+      }
+
+      setErrors([error]);
     }
   };
 
@@ -44,11 +51,17 @@ export const AuthProvider = ({ children }) => {
       setAuthenticated(true);
       setUser(res.data);
     } catch (err) {
-      console.log(err.response.data);
-      if (Array.isArray(err.response.data)) {
-        return setErrors(err.response.data.map((err) => err.error));
+      const { response: { data: { error } = {} } = {} } = err;
+
+      if (Array.isArray(error.issues)) {
+        return setErrors(error.issues.map((issue) => issue.message));
       }
-      setErrors([err.response.data.error]);
+
+      if (Array.isArray(error)) {
+        return setErrors(error);
+      }
+
+      setErrors([error]);
     }
   };
 

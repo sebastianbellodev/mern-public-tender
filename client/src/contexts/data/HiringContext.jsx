@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from 'react';
-import { getHiringsRequest } from '../api/routes/hiring.routes.js';
+import { getHiringsRequest } from '../../api/routes/hiring.routes.js';
 
 const HiringContext = createContext();
 
@@ -17,18 +17,29 @@ export const useHiringContext = () => {
 // eslint-disable-next-line react/prop-types
 export function HiringProvider({ children }) {
   const [hirings, setHirings] = useState([]);
+  const [errors, setErrors] = useState([]);
 
   const getHirings = async () => {
     try {
       const res = await getHiringsRequest();
       setHirings(res.data);
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      const { response: { data: { error } = {} } = {} } = err;
+
+      if (Array.isArray(error.issues)) {
+        return setErrors(error.issues.map((issue) => issue.message));
+      }
+
+      if (Array.isArray(error)) {
+        return setErrors(error);
+      }
+
+      setErrors([error]);
     }
   };
 
   return (
-    <HiringContext.Provider value={{ hirings, getHirings }}>
+    <HiringContext.Provider value={{ hirings, getHirings, errors }}>
       {children}
     </HiringContext.Provider>
   );

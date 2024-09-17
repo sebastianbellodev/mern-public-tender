@@ -1,14 +1,14 @@
-import FileTable from '../components/tables/FileTable.jsx';
+import SupplierTable from '../components/tables/SupplierTable.jsx';
 
-function HiringPage() {
+function SupplierPage() {
   return (
     <main className="pt-[20vh] flex flex-col justify-start w-screen px-28 overflow-hidden scrollbar-hide">
       <h1 className="scroll-m-20 text-3xl font-extrabold tracking-tight lg:text-4xl">
-        File
+        Supplier
       </h1>
-      <FileTable></FileTable>
+      <SupplierTable></SupplierTable>
     </main>
   );
 }
 
-export default HiringPage;
+export default SupplierPage;

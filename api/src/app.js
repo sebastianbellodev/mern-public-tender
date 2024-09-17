@@ -12,11 +12,14 @@ import internationalPolicyRouter from './v1/routes/international.policy.routes.j
 import lawRouter from './v1/routes/law.routes.js';
 import assessmentMetricRouter from './v1/routes/assessment.metric.routes.js';
 import authRouter from './v1/routes/auth.routes.js';
-import swaggerRouter from './v1/swagger.js';
 import status from './json/status.js';
 
 const app = express();
 const API = '/api/v1';
+
+if (process.env.NODE_ENV === 'production') {
+  app.enable('trust proxy');
+}
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
@@ -42,8 +45,6 @@ app.use(API, lawRouter);
 app.use(API, internationalPolicyRouter);
 app.use(API, assessmentMetricRouter);
 app.use(API, hiringProcessCategoryRouter);
-// Docs router
-app.use(API, swaggerRouter);
 
 app.get(API, (req, res) => {
   res.status(status.OK).json({ message: 'Welcome to the API!' });
